@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fueling and Amalgamator Calculator</title>
+		<script src="lz-string.js"></script>
+		<script type="text/javascript" src="gator.js"></script>
+		<link rel="stylesheet" type="text/css" href="stylish.css" />
+		<meta charset="utf-8" />
+	</head>
+    <style>
+    body {
+	background-color: grey;
+	color: white;
+}
+
+.hidden {
+	display: none;
+}
+
+textarea {
+	width: 40%;
+	height: 4%;
+}
+
+input {
+	width: 40%;
+	height: 15px;
+}
+
+#invalid {
+	color: orange;
+}
+
+#calculate {
+	position: absolute;
+	left: 45%;
+	width: 30%;
+	height: 5%;
+	border-radius: 12px;
+	
+}
+
+.filler {
+	height: 5px;
+}
+
+.filler2 {
+	width: 100px;
+}
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+body {
+	  background:#35A3BE url('https://images.unsplash.com/photo-1595309959777-08d5da891d7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1643&q=80" alt="Naruto')no-repeat center center fixed;
+  	-webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+    padding-top: 0px;
+}
+
+h1 {
+   color: #fff; 
+   text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+   padding-top: 30px;
+   font-size: 100px; 
+   font-weight: 700;
+   text-align: center;
+   font-family: 'Source Sans Pro', sans-serif;
+   margin: 0px;
+}
+
+form {
+    margin-left:auto;
+    margin-right:auto;
+    width: 965px;
+    height: 450px;
+    padding:30px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; 
+    overflow: hidden; 
+}
+
+textarea{
+	  background: rgba(0, 0, 0, 0.4); 
+    width: 894px;
+    height: 110px;
+    border: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; 
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 45px;
+    padding-right: 20px;
+    padding-top: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+
+
+.nameinput, .emailinput {
+    width: 894px;
+    height: 48px;
+    border: none;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; 
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+input.nameinput {
+	  background: rgba(0, 0, 0, 0.4); 
+	  padding-left: 45px;
+}
+
+input.emailinput {
+	  background: rgba(0, 0, 0, 0.4);
+	  padding-left: 45px;
+}
+
+input.message {
+	  background: rgba(0, 0, 0, 0.4);
+	  padding-left: 45px;
+}
+
+
+
+::-webkit-input-placeholder {
+	  color: #fff;
+}
+
+:-moz-placeholder{ 
+    color: #fff; 
+}
+
+::-moz-placeholder {
+    color: #fff;
+}
+
+:-ms-input-placeholder {  
+	  color: #fff; 
+}
+
+input:focus, textarea:focus { 
+	  background-color: rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px 1px rgba(255,255,255,.5);
+    -webkit-box-shadow: 0 0 5px 1px rgba(255,255,255,.5);
+    box-shadow: 0 0 5px 1px rgba(255,255,255,.5);
+	  overflow: hidden; 
+}
+
+.btn {
+	border: none;
+	font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  width: 200px;
+  height: 48px;
+	color: #000;
+	background: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: 700;
+	position: relative;
+  outline: none;
+  box-shadow: 0 6px #cecece;
+  border-radius: 5px;
+  float: right;
+  margin-right: 6px;
+}
+
+.btn:hover {
+	background: #fff;
+  outline: none;
+  box-shadow: 0 4px #cecece;
+	top: 2px;
+}
+
+.btn:active {
+	background: #fff;
+  outline: none;
+  box-shadow: 0 0 #cecece;
+	top: 6px;
+}
+
+.flat {
+	border: none;
+	cursor: pointer;
+	display: inline-block;
+	outline: none;
+  position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+
+.flat:before {
+	position: absolute;
+	height: 100%;
+	left: 0;
+	top: 0;
+	line-height: 3;
+	font-size: 140%;
+	width: 60px;
+}
+
+
+.flat {
+   width: 960px !important;
+   height: 48px;
+   overflow: hidden;
+   margin-bottom: 20px;
+   background: url(http://www.jordancundiff.com/wp-content/uploads/2014/03/icon-dropdown.png) no-repeat right;
+   }
+
+@media only screen and ( min-width: 768px ) and ( max-width: 1035px ) {
+  h1 { font-size: 80px; }
+  form { width: 736px !important; }
+    #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat > select, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat { width: 731px !important; }
+    .nameinput, .emailinput, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Message > textarea { width: 666px !important; }
+}
+
+@media only screen and ( max-width: 804px ) {
+    h1 { font-size: 50px; }
+  form { width: 450px !important; }
+   #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat > select, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat { width: 445px !important; }
+    .nameinput, .emailinput, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Message > textarea { width: 380px !important; }
+}
+
+@media only screen and ( max-width: 517px ) {
+     h1 { font-size: 30px; }
+  form { width: 295px !important; }
+  #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat > select, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Subject.flat { width: 290px !important; }
+    .nameinput, .emailinput, #wpcf7-f156-p143-o1\20 formwrap > form > p > span.wpcf7-form-control-wrap.Message > textarea { width: 225px !important; }
+  .btn { width: 110px; }
+}
+
+.select {
+	width: 40%;
+	text-align-last: center;
+}
+
+#inputs {
+	position: absolute;
+	width: 30%;
+	height: 98%;
+	left: 5%;
+}
+
+.efficiency {
+	float: right;
+	padding-right: 1px;
+}
+
+#hze {
+	width: 10%;
+}
+
+#macros {
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	left: 35%;
+	top: 0%;
+	background-color: #999999;
+}
+
+.macro {
+	position: relative;
+	width: 60%;
+	height: 5%;
+	left: 20%;
+	border-radius: 8px;
+}
+
+.macroZone {
+	position: relative;
+	width: 58%;
+	left: 20%;
+}
+
+#uncoordsZone {
+	width: 50%;
+}
+
+#uncoordsGoal {
+	width: 15%;
+}
+
+#offset5Label {
+	display: block;
+	position: relative;
+	float: left;
+	white-space: nowrap;
+}
+
+#results {
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	left: 55%;
+	top: 0%;
+	background-color: #666666;
+	padding-left: 5px;
+}
+
+.table {
+	border-style: solid;
+	border-width: 1px;
+}
+
+#faq {
+	position: absolute;
+	width: 15%;
+	height: 8%;
+	right: 4.5%;
+	bottom: 0%;
+	background-color: #CCCCCC;
+}
+
+#faqScreen {
+	position: absolute;
+	width: 98%;
+	height: 91%;
+	max-height: 91%;
+	overflow-y: scroll;
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: #111111;
+	color: yellow;
+	font-size: 250%;
+	outline-style: none;
+}
+
+.answer {
+	font-size: 50%;
+}
+    </style>
+
+	<body>
+		<div id="inputs">
+			<br>
+			<textarea id="saveBox" placeholder="Paste your save here" onpaste="pasteSave(event)" onclick="clearText()" type="text" ></textarea>
+			<button class="hidden" id="calculate" onclick="calculateCurrentPop()">Calculate</button>
+			<br>
+			<label title="Check this to keep your run stats the same, only updating perks and DG levels">
+				<input id="lockRun" type="checkbox">Lock Run Stats</label> 
+			<span id="invalid"></span>
+			<br><br>
+			Run Stats<br>
+			<label title="Zone to begin fueling">
+				<input id="fuelStart" type="number" min="230" onchange="changeFuelStart(this.value)">&nbspFuel Start Zone
+			</label>
+			<br>
+			<div class="filler"></div>
+			<label title="Zone to end fueling">
+				<input id="fuelEnd" type="number" min="230" onchange="changeFuelEnd(this.value)">&nbspFuel End Zone
+			</label>
+			<br>
+			<div class="filler"></div>
+			<label title="Number of zones to fuel">
+				<input id="fuelZones" type="number" min="0" onchange="changeFuelZones(this.value)">&nbspZones to Fuel
+			</label>
+			<br>
+			<div class="filler"></div>
+			<label title="Zone you end the run on">
+				<input id="runEnd" type="number" min="0" onchange="changeRunEnd(this.value)">&nbspRun End Zone
+			</label>
+			<br>
+			<div class="filler"></div>
+			<label title="Default is 1; if a daily gives 20% reduced housing, use 0.8, or -20">
+				<input id="housingMod" type="number" step="0.01" max="1" min="0.4" onchange="changeHousingMod(this.value)">&nbspHousing Mod
+			</label>
+			<br>
+			<div class="filler"></div>
+			<label title="Spires cleared *this run*">
+				<input id="spiresCleared" type="number" min="0" max="6" onchange="changeSpiresCleared(this.value)">&nbsp#Spires Cleared
+			</label>
+			<br><br><br>
+			Perk Levels<br>
+			<input id="carp" type="number" onchange="changeCarp(this.value)">&nbspCarpentry
+			<br>
+			<div class="filler"></div>
+			<input id="carp2" type="number" onchange="changeCarp2(this.value)">&nbspCarpentry II
+			<br>
+			<div class="filler"></div>
+			<input id="coord" type="number" onchange="changeCoord(this.value)">&nbspCoordinated
+			<br><br><br>
+			DG Levels<span class="efficiency">Next Upgrade</span><br>
+			<input id="efficiency" type="number" onchange="changeEfficiency(this.value)">&nbspEfficiency
+			<span class="efficiency" id="efficiencyEfficiency"></span>
+			<br>
+			<div class="filler"></div>
+			<input id="capacity" type="number" onchange="changeCapacity(this.value)">&nbspCapacity
+			<span class="efficiency" id="capacityEfficiency"></span>
+			<br>
+			<div class="filler"></div>
+			<input id="supply" type="number" onchange="changeSupply(this.value)">&nbspSupply
+			<span class="efficiency" id="supplyEfficiency"></span>
+			<br>
+			<div class="filler"></div>
+			<input id="overclocker" type="number" onchange="changeOverclocker(this.value)">&nbspOverclocker
+			<span class="efficiency" id="overclockerEfficiency"></span>
+			<br>
+			<button class="hidden" id="checkDG" onclick="checkDGUpgrades()">Update</button>
+			<input class="efficiency" id="hze" type="number" onchange="changeHZE(this.value)"><span class="efficiency">Push Run Goal:&nbsp</span>
+			<br><br>
+			DG Upgrades<br>
+			<select class="select" id="storage" onchange="changeStorage(this.value)">
+				<option value="Yes">Yes</option>
+				<option value="No">No</option>
+			</select>&nbspStorage
+			<div class="filler"></div>
+			<select class="select" id="slowburn" onchange="changeSlowburn(this.value)">
+				<option value="Yes">Yes</option>
+				<option value="No">No</option>
+			</select>&nbspSlowburn
+			<div class="filler"></div>
+			<select class="select" id="magmaFlow" onchange="changeMagmaFlow(this.value)">
+				<option value="Yes">Yes</option>
+				<option value="No">No</option>
+			</select>&nbspMagma Flow
+		</div>
+		<div id="macros">
+			<br>
+			<center>Version <span id="version"></span></center>
+			<br><br>
+			<button class="macro" id="optimize" onclick="optimize()">Optimize</button><br>
+			<div class="filler"></div>
+			<button class="macro" id="minimize" onclick="minimize(0)">Minimize</button><br>
+			<div class="filler"></div>
+			<button class="macro" id="minimize-1" onclick="minimize(1)">Minimize - 1</button><br>
+			<div class="filler"></div>
+			<button class="macro" id="minimizeAtZone" onclick="minimize(0, 1)">Minimize At Zone:</button><br>
+			<input class="macroZone" id="minimizeZone" type="number" onchange="changeMinimizeZone(this.value)"><br>
+			<div class="filler"></div>
+			<button class="macro" id="minimizeCapacity" onclick="minimize(0, 2)">Minimize Capacity</button><br>
+			<div class="filler"></div>
+			<button class="macro" id="forceGator" onclick="forceGator()">Force Gator At Zone:</button><br>
+			<input class="macroZone" id="gatorZone" type="number" onchange="changeGatorZone(this.value)"><br>
+			<div class="filler"></div>
+			<label title="Hold back on buying this many coordination upgrades throughout the run">
+			<span class="macroZone">Coords Withheld: </span></label><br>
+			<input class="macroZone" id="uncoords" value="0" type="number" onchange="changeUncoords(this.value)"><br>
+			<div class="filler"></div>
+			<label title="Stop buying coordinations at the specified zone in order to hit the goal number of Amalgamators. Use -1 to not withhold any">
+			<span class="macroZone">Withhold Coords Zone/Goal: </span></label><br>
+			<input class="macroZone" id="uncoordsZone" value="" type="number" onchange="changeUncoordsZone(this.value)">
+			<select class="macroZone" id="uncoordsGoal" onchange="changeUncoordsGoal(this.value)">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option selected value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			</select><br>
+			<div class="filler"></div>
+			<button class="macro hidden" id="minimizeCapacity-1" onclick="minimize(1, 2)">Minimize Capacity - 1</button><br>
+			<div class="filler"></div>
+			<button class="macro hidden" id="minimizeAtZone-1" onclick="minimize(1, 1)">Minimize At Zone - 1</button><br>
+			<div class="filler"></div>
+			<label id="offset5Label" title="Check this to only have gators updated every 5 zones when you'd die from an omnipotrimp explosion">
+				<input id="offset5" type="checkbox">Use 5 zone breakpoints</label> 
+			<br><br><br>
+			<center><span id="message"></span></center>
+		</div>
+		<div id="results">
+			<br><br>Results<br>
+			<table class="table" id="resultsTable" cellSpacing="5" cellPadding="0">
+				<tr><td>Total Population</td><td id="totalPop">0</td>
+					<td class="filler2"></td>
+					<td>Final Amals</td><td id="finalAmals">0</td>
+				</tr>
+				<tr><td>% from Tauntimps</td><td id="tauntimpPercent">0</td>
+					<td></td>
+					<td>Max Amals</td><td id="maxAmals">0</td>
+				</tr>
+				<tr><td>Last Coord</td><td id="lastCoord">-</td>
+					<td></td>
+					<td>@ Zone</td><td id="finalAmalZone">0</td>
+				</tr>
+				<tr><td>Needed Pop</td><td id="neededPop">0</td>
+					<td></td>
+					<td>Final Army Size</td><td id="finalArmySize">0</td>
+				</tr>
+				<tr><td>Increase per Coord</td><td id="coordIncrease">0</td>
+					<td></td>
+					<td>Final Amal Ratio</td><td id="finalAmalRatio">0</td>
+				</tr>
+				<tr><td></td><td></td>
+					<td></td>
+					<td>Your Final Ratio</td><td id="yourFinalRatio">0</td>
+				</tr>
+				<tr><td>Zones of MI</td><td id="zonesOfMI">0</td>
+					<td></td>
+					<td>Zones Withheld</td><td id="zonesWithheld">-</td>
+				</tr>
+				<tr><td>Zones of Fuel</td><td id="zonesOfFuel">0</td>
+					<td></td>
+					<td></td><td></td>
+				</tr>
+				<tr><td>Magma Zones</td><td id="zonesOfMagma">0</td>
+					<td></td>
+					<td></td><td></td>
+				</tr>
+				<tr><td>Total MI Earned</td><td id="totalMI">0</td>
+					<td></td>
+					<td></td><td></td>
+				</tr>
+				<tr><td>Max Supply @ Zone</td><td id="maxSupplyZone">0</td>
+					<td></td>
+					<td></td><td></td>
+				</tr>
+			</table>
+			<br>
+			<table class="table" id="extraGators" cellSpacing="5">
+				<tr><td>Range</td><td>Extra Gator</td><td>Needed Pop Mult</td><td>Unbought Coords</td></tr>
+				<tr><td>230-300</td><td id="ex1"></td><td id="npm1"></td><td id="uc1"></td></tr>
+				<tr><td>301-400</td><td id="ex2"></td><td id="npm2"></td><td id="uc2"></td></tr>
+				<tr><td>401-500</td><td id="ex3"></td><td id="npm3"></td><td id="uc3"></td></tr>
+				<tr><td>501-600</td><td id="ex4"></td><td id="npm4"></td><td id="uc4"></td></tr>
+				<tr><td>601+</td><td id="ex5"></td><td id="npm5"></td><td id="uc5"></td></tr>
+			</table>
+		</div>
+		<button id="faq" onclick="goFaq()">FAQ</button>
+		<div class="hidden" id="faqScreen" tabindex="0">
+			<br>
+			<center>FAQ</center><br>
+			What does this do?
+			<span class="answer">
+			You can use this calculator to determine the number of amalgamators that are obtainable depending on how much, and when you fuel.
+			Since each Gator grants up to 1.5x attack along with a 40x health boost, it can be beneficial to get as many as are easily obtainable.
+			</span>
+			<br>
+			How do I use this?
+			<span class="answer">
+			Simply enter your stats or paste your save file to fill in the left-hand side of the screen. The right side results will automatically be calculated. 
+			The most important value will likely be the Max number of Amals you can get in a run. 
+			</span>
+			<br>
+			What do the numbers to the right of the DG levels mean?
+			<span class="answer">
+			The numbers represent the efficiency of the next DG purchase. A higher number means you should purchase that upgrade first. This calculation uses your current run stats to 
+			determine how much MI is gained per run in order to determine how many runs are needed to afford each upgrade, and how much MI is lost through decay in the process. It then considers 
+			how much population gain each upgrade is worth on a push run (where population is fully utilized) and determines a Population gain per MI spent value for each upgrade. Results are 
+			finally each divided by the value of the Efficiency value for a normalized result. 
+			</span>
+			<br>
+			What does the table below the Results table mean?
+			<span class="answer">
+			This table lists how many coordinations you would have to hold off buying in order to squeeze out an extra Amalgamator. 
+			So if the upper table told you to expect hitting 5 Amals at zone 501, it may be possible to keep your population:army ratio lower by withholding coordinations in order to get a 6th gator in the 501-600 range, or in the 600+ range. 
+			Keep in mind that this uses the "#Spires Cleared" value to determine if the needed ratio decreases after each spire.
+			</span>
+			<br>
+			What do the buttons in the middle column do?
+			<span class="answer">
+			These buttons are used to determine when it is optimal to fuel. They each provide sightly different bits of information that you can tailor your fueling preferences to.
+			<br>The "Optimize" button will take the number of zones to fuel currently shown, and figure out the best starting zone to fuel in order to maximize population.
+			<br>The "Minimize" button will try to determine the fewest number of zones you'd need to fuel for in order to get the maximum number of Amalgamators possible, thus maximizing MI gains. <br>The "Minimize - 1" button will do the same thing, 
+			but with getting 1 less Gator. This can be useful if you'd need to fuel for an entire run in order to get your Max number of gators, and you'd rather keep the MI gains.
+			<br>The "Minimize at Zone" button will attempt to minimize, while ensuring you get your last Amalgamator by the specified zone. This is useful if you normally wouldn't get your final Gator until late in your run otherwise, as you will 
+			get the benefit of the extra Gator earlier. 
+			<br>The "Minimize Capacity" button also adjusts your capacity value to minimize number of zones to fuel. You'll need to use the in-game capacity slider to adjust to the recommended value. 
+			<br>The "Force Gator At Zone" button will determine how many coordinations you'd need to withhold from buying in order to get an extra gator on the zone specified. This will update the row of the corresponding zone in the table below the 
+			results table, but won't change anything else. 
+			<br>The "Coords Withheld" option allows you to set a certain number of coordination upgrades to refrain from buying, in order to get an extra amalgamator earlier or with less fueling than otherwise would be possible. 
+			<br>The "Withhold Coords Zone/Goal" option allows you to specify a certain zone to stop buying coordinations in order to reach the chosen goal number of amalgamators. These last two options can only be used separately, not together. This will 
+			also update the "Zones Withheld" result with the number of zones you have to hold off on buying coordinations, and therefore the number of coordinations behind you will be.
+			<br>Finally, the "Use 5 zone breakpoints" tick will calculate updates to your Amalgamators only after every 5th zone when they would die from an Omnipotrimp explosion. Without this option 
+			checked, most of the time new Amalgamators will show up on the zone after a spire, due to the ratio needed decreasing. However, as Gators are only updated on trimp death, if you survive after beating a spire for the next 5 zones (which 
+			you are likely to do if you're strong enough to have beaten it), then you would get 5 more coordination upgrades before your next death, which will increase your army size, and therefore the needed population for your next Gator, possibly 
+			pushing it beyond the population you've amassed. 
+			</span>
+			<br>
+			What assumptions are being made?
+			<span class="answer">
+			This calculator assumes no population before you begin fueling. The population received before your first DG tick is inconsequential to your total population, and won't affect the results shown for the intended users of this page.
+			<div class="filler"></div>
+			The calculator assumes exactly 2.97 tauntimps received per zone. This averages out to the expected value, but it is possible to have good/bad luck with tauntimps, and have your population thrive/suffer accordingly.
+			<div class="filler"></div>
+			The calculator assumes all DG ticks made are overclocks. This slightly affects the final results, especially for those with lower overclocker levels, as those non-OC ticks will be stronger that OC ticks, and happen earlier, therefore 
+			benefitting more from tauntimp compounding. However, the differences are still small, and largely unnoticable for fueling more than a couple of zones.
+			<div class="filler"></div>
+			This calculator assumes all fuel still in the tank after you stop fueling (and therefore stop overclocking) disappears. This causes the calculator to underestimate your total population by a bit, especially for fueling a smaller number 
+			of zones. This can be useful, as it provides a small cushion of extra pop to help ensure you get all the Gators you expect, even with poor tauntimp luck. However, with higher capacity values, it may determine that you need to fuel for longer 
+			in order to begin overclocking, in which case it may be best to use the in-game capacity slider to limit your max fuel and adjust the values of the calculator accordingly. Players with very high capacity levels may find the Minimize Capacity 
+			function useful, as this will suggest a setting for the fuel slider in order to maximize MI.
+			</span>
+			<br>
+			I found an error, what can I do?
+			<span class="answer">
+			Please contact me on reddit (u/Nohmou) or discord (@Nohmou#5097) and I'll look at it right away! Screenshots of your settings are helpful in diagnosing any technical issues.
+			</span>
+			<br>
+			Is this up to date?
+			<span class="answer">
+			This was last updated on November 7, 2018.
+			</span>
+			<br>
+			<br>
+			<br>
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+		</div>
+	</body>
+	
+	<!-- Copyright Nohmou, 2020-->
